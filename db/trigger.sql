@@ -134,18 +134,19 @@ END;
 -- TRIGGER PARA LOGIN Y LOGOUT
 
 
--- TRIGGER PARA LOGIN
 DELIMITER //
 CREATE TRIGGER tg_login_cliente
 AFTER UPDATE ON tb_clientes 
 FOR EACH ROW 
 BEGIN
-    IF NEW.estado = 'activo' AND OLD.estado <> 'activo' THEN
+    IF NEW.estado = 'Activo' AND OLD.estado <> 'Activo' THEN
         INSERT INTO tb_log_clientes (accion, id_cliente, nombre_completo)
         VALUES ('LOGIN', NEW.id_cliente, CONCAT(NEW.nombre, ' ', NEW.ap_paterno, ' ', NEW.ap_materno));
     END IF;
 END;
 //
+DELIMITER ;
+
 
 -- TRIGGER PARA LOGOUT
 DELIMITER // 
@@ -153,12 +154,13 @@ CREATE TRIGGER tg_logout_cliente
 AFTER UPDATE ON tb_clientes 
 FOR EACH ROW 
 BEGIN
-    IF NEW.estado = 'inactivo' AND OLD.estado <> 'inactivo' THEN
+    IF NEW.estado = 'Inactivo' AND OLD.estado <> 'Inactivo' THEN
         INSERT INTO tb_log_clientes (accion, id_cliente, nombre_completo)
         VALUES ('LOGOUT', OLD.id_cliente, CONCAT(OLD.nombre, ' ', OLD.ap_paterno, ' ', OLD.ap_materno));
     END IF;
 END;
 //
+DELIMITER ;
 
 
 --------------------------------------------------------------------------------------------------------
