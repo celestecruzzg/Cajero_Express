@@ -2,14 +2,14 @@
 DELIMITER //
 
 CREATE PROCEDURE sp_login (
-    IN p_n_tarjeta VARCHAR(16),
-    IN p_nip VARCHAR(4)
+    IN n_tarjeta VARCHAR(16),
+    IN nip VARCHAR(4)
 )
 BEGIN
     SELECT id_tarjeta, n_tarjeta, nip, saldo, tb_tarjetas.id_cliente, nombre, ap_paterno, ap_materno, estado
     FROM tb_tarjetas
     INNER JOIN tb_clientes ON tb_tarjetas.id_cliente = tb_clientes.id_cliente
-    WHERE n_tarjeta = p_n_tarjeta AND nip = p_nip;
+    WHERE n_tarjeta = n_tarjeta AND nip = nip;
 END //
 
 DELIMITER ;
@@ -19,12 +19,12 @@ DELIMITER ;
 DELIMITER //
 
 CREATE PROCEDURE sp_estado_inactivo (
-    IN p_id_cliente INT
+    IN id_cliente INT
 )
 BEGIN
     UPDATE tb_clientes
     SET estado = 'Inactivo'
-    WHERE id_cliente = p_id_cliente;
+    WHERE id_cliente = id_cliente;
 END //
 
 DELIMITER ;
@@ -34,12 +34,12 @@ DELIMITER ;
 DELIMITER //
 
 CREATE PROCEDURE sp_estado_activo (
-    IN p_id_cliente INT
+    IN id_cliente INT
 )
 BEGIN
     UPDATE tb_clientes
     SET estado = 'Activo'
-    WHERE id_cliente = p_id_cliente;
+    WHERE id_cliente = id_cliente;
 END //
 
 DELIMITER ;
