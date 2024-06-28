@@ -13,7 +13,7 @@ if(isset($_POST['n_tarjeta']) && isset($_POST['nip'])){
             FROM tb_tarjetas
             INNER JOIN tb_clientes
             ON tb_tarjetas.id_cliente = tb_clientes.id_cliente*/
-
+            
     $result = $conexion->query($sql);
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
